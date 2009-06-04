@@ -1,4 +1,6 @@
-# Here goes your database connection and options:
+require 'sequel'
 
-# Here go your requires for models:
-# require 'model/user'
+Sequel::Model.plugin(:schema)
+DB = Sequel.sqlite('app.db')
+
+require 'model/letter'

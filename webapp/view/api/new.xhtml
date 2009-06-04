@@ -1,0 +1,6 @@
+<p>
+  Your Session ID is  #{@letter.token}.
+</p>
+<p>
+  #{anchor("Preview your message", MainController.r('letter',@letter.token))}
+</p>
