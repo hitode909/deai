@@ -2,8 +2,9 @@ class Letter < Sequel::Model
   set_schema do
     primary_key :id
     String :token
-    String :profile, :null => false
-    String :message
+    String :name
+    text :profile
+    text :message, :null => false
     time :created
   end
 

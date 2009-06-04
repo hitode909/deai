@@ -7,4 +7,5 @@ class MainController < Controller
     @letter = Letter[:token => token]
     redirect(MainController.r) unless @letter
   end
+
 end

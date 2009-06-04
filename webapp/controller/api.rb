@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class ApiController < Controller
   map '/api'
   def index
@@ -7,15 +5,13 @@ class ApiController < Controller
   end
 
   def new
-    return "please set your profile" unless request[:profile]
+    return "no message" unless request[:message]
     @letter = Letter.create(
+      :name => request[:name],
       :profile => request[:profile],
       :message => request[:message]
       )
     return "something wrong" unless @letter
   end
 
-  def notemplate
-    "there is no 'notemplate.xhtml' associated with this action"
-  end
 end
