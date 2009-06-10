@@ -24,4 +24,12 @@ class Letter < Sequel::Model
   def created_to_s
     self.created.strftime('%Y-%m-%d %H:%M:%S')
   end
+
+  def publish
+    { :name => self.name.to_s,
+      :profile => self.profile.to_s,
+      :message =>self.message.to_s,
+      :created => self.created,
+    }
+  end
 end

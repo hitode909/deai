@@ -4,3 +4,9 @@
 <p>
   #{anchor("Preview your message", MainController.r('letter',@letter.token))}
 </p>
+<p>
+  #{anchor("wait for message(yaml)", MainController.r('api', 'get.yaml'))}
+</p>
+<p>
+  #{anchor("wait for message(html)", MainController.r('api', 'get'))}
+</p>
