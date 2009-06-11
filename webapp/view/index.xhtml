@@ -1,6 +1,14 @@
+<script type="text/javascript" src="js/index.js">
+</script>
+
 <h3>Let's start</h3>
-<form action="/api/new" method="POST">
-<p>name:<input type="text" name="name" value="yourName" /></p>
-<p>message:<input type="text" name="message" value="hello!!!" /></p>
-<input type="submit" value="Create" />
-</form>
+<div id="formcontainer">
+  <form id="form">
+    <p>name:<input type="text" name="name" value="#{session[:name]}" /></p>
+    <p>message:<input type="text" name="message" value="hello!!!" /></p>
+    <input type="submit" value="Create" />
+  </form>
+</div>
+<div id="status"></div>
+<ul id="log">
+</ul>

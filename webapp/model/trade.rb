@@ -19,7 +19,7 @@ class Trade < Sequel::Model
 
   def get_pair
     self.active!
-    30.times do
+    3.times do
       refresh
       break if self.pair
       single = Trade.filter('id != ?', self.id).filter(:active => true).filter(:pair_id => nil).first

@@ -18,24 +18,22 @@ class ApiController < Controller
       )
     return "something wrong" unless @letter
     session[:letter_token] = @letter.token
+    session[:name] = request[:name]
+    @letter.publish
   end
 
   def get
     token = session[:letter_token]
     letter = Letter[:token => token]
-    redirect(MainController.r) unless letter
+    return nil unless letter
     @trade = Trade.find_or_create(:letter_id => letter.id)
     @trade.get_pair
+#    @trade.refresh
     if @trade.pair
       session.delete(:letter_token)
-      return result(@trade.pair.letter)
+      return @trade.pair.letter.publish
     end
-  end
-
-  def result(letter)
-    result = { }
-    result[:result] = !!letter
-    result[:content] = letter if letter
+    nil
   end
 
 end
