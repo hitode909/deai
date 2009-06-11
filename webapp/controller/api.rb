@@ -1,9 +1,9 @@
 # -*- coding: nil -*-
 require 'pp'
-require 'yaml'
+require 'json'
 class ApiController < Controller
   map '/api'
-  provide(:yaml, :type => 'text/javascript'){ |action, value| value.to_yaml}
+  provide(:json, :type => 'text/javascript'){ |action, value| value.to_json}
 
   def index
     @title = "This is API."
@@ -13,7 +13,7 @@ class ApiController < Controller
     return "no message" unless request[:message]
     @letter = Letter.create(
       :name => request[:name],
-      :profile => request[:profile],
+#      :profile => request[:profile],
       :message => request[:message]
       )
     return "something wrong" unless @letter
@@ -28,8 +28,14 @@ class ApiController < Controller
     @trade.get_pair
     if @trade.pair
       session.delete(:letter_token)
-      return @trade.pair.letter.publish
+      return result(@trade.pair.letter)
     end
+  end
+
+  def result(letter)
+    result = { }
+    result[:result] = !!letter
+    result[:content] = letter if letter
   end
 
 end

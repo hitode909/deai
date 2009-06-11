@@ -17,7 +17,7 @@ class Letter < Sequel::Model
   end
 
   def generate_token
-    key = self.profile + self.message + self.created.to_s
+    key = self.message + self.created.to_s
     self.token = Digest::SHA1.hexdigest(key)
   end
 
@@ -26,8 +26,7 @@ class Letter < Sequel::Model
   end
 
   def publish
-    { :name => self.name.to_s,
-      :profile => self.profile.to_s,
+    { :name => self.name,
       :message =>self.message.to_s,
       :created => self.created,
     }

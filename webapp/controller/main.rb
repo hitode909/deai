@@ -1,5 +1,3 @@
-require 'pp'
-
 class MainController < Controller
   def index
     @title = "Deai Web Application"
