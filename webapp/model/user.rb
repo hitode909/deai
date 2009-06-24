@@ -1,13 +1,12 @@
-class Letter < Sequel::Model
+class User < Sequel::Model
   set_schema do
     primary_key :id
     String :token
-    Integer :user_id
-    text :profile
-    text :message, :null => false
     time :created
+    time :last_access
+    Boolean :active, :null => false, :default => true
   end
-  many_to_one :user
+  one_to_many :letters
   create_table unless table_exists?
 
   def after_create
@@ -18,11 +17,5 @@ class Letter < Sequel::Model
 
   def created_to_s
     self.created.strftime('%Y-%m-%d %H:%M:%S')
-  end
-
-  def publish
-    { :message =>self.message.to_s,
-      :created => self.created,
-    }
   end
 end

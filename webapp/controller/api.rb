@@ -12,13 +12,11 @@ class ApiController < Controller
   def new
     return "no message" unless request[:message]
     @letter = Letter.create(
-      :name => request[:name],
-#      :profile => request[:profile],
-      :message => request[:message]
+      :message => request[:message],
+      :user => session[:user]
       )
     return "something wrong" unless @letter
     session[:letter_token] = @letter.token
-    session[:name] = request[:name]
     @letter.publish
   end
 

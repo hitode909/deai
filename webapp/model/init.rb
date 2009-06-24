@@ -1,4 +1,5 @@
 require 'sequel'
+require 'securerandom'
 
 Sequel::Model.plugin(:schema)
 DB = Sequel.sqlite('app.db')
